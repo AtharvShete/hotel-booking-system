@@ -4,7 +4,6 @@ import { hash } from "bcryptjs";
 import * as z from "zod";
 
 
-// Validation schema
 export const signUpSchema = z
   .object({
     firstName: z.string().min(1, { message: "First name is required" }),
