@@ -2,9 +2,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import {
   type DefaultSession,
   type NextAuthConfig,
-  type AdapterUser,
 } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { z as zod } from "zod";
 import { compare } from "bcryptjs";
@@ -43,7 +41,6 @@ const adapter = PrismaAdapter(db);
 
 export const authConfig = {
   providers: [
-    DiscordProvider,
     CredentialsProvider({
       credentials: {
         email: { label: "Email", type: "email" },
@@ -84,11 +81,9 @@ export const authConfig = {
       },
     }),
   ],
-  // Explicitly set the strategy to JWT
   session: {
     strategy: "jwt",
   },
-  // Only use the adapter for OAuth providers
   adapter: adapter,
   callbacks: {
     session: ({ session, token }) => ({
@@ -103,7 +98,7 @@ export const authConfig = {
       },
     }),
     jwt: async ({ token, user }) => {
-      if (user) {
+      if (user && 'firstName' in user && 'lastName' in user && 'role' in user)  {
         token.sub = user.id;
         token.firstName = user.firstName;
         token.lastName = user.lastName;
