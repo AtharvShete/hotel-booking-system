@@ -43,10 +43,6 @@ export function Header() {
                                     <Search className="h-5 w-5 text-green-600" />
                                     Browse Rooms
                                 </Link>
-                                <Link href="/map" className="flex items-center gap-2 text-lg font-medium">
-                                    <MapPin className="h-5 w-5 text-green-600" />
-                                    Map View
-                                </Link>
                                 <Link href="/favorites" className="flex items-center gap-2 text-lg font-medium">
                                     <Heart className="h-5 w-5 text-green-600" />
                                     My Favorites
@@ -67,9 +63,6 @@ export function Header() {
                         </Link>
                         <Link href="/rooms" className="text-sm font-medium transition-colors hover:text-green-600">
                             Browse Rooms
-                        </Link>
-                        <Link href="/map" className="text-sm font-medium transition-colors hover:text-green-600">
-                            Map View
                         </Link>
                         <Link href="/coupons" className="text-sm font-medium transition-colors hover:text-green-600">
                             Coupons

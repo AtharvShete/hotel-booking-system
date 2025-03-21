@@ -97,34 +97,34 @@ export default function LoginPage() {
     return (
         <div className="flex min-h-screen flex-col bg-background">
             <main className="flex-1 flex items-center justify-center py-12">
-                <Card className="mx-auto max-w-md w-full">
-                    <CardHeader className="space-y-1">
-                        <CardTitle className="text-2xl font-bold text-center text-green-700">
+                <Card className="mx-auto max-w-md w-full rounded-md">
+                    <CardHeader className="space-y-1 rounded-md">
+                        <CardTitle className="text-2xl font-bold text-center text-green-700 rounded-md">
                             {activeTab === "login" ? "Account Login" : "Register Account"}
                         </CardTitle>
-                        <CardDescription className="text-center">
+                        <CardDescription className="text-center rounded-md">
                             {activeTab === "login"
                                 ? "Login to access your account and orders"
                                 : "Create an account to start using our services"}
                         </CardDescription>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="rounded-md">
                         {error && (
-                            <div className="p-3 mb-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                            <div className="p-3 mb-4 bg-red-100 border border-red-400 text-red-700 rounded-md">
                                 {error}
                             </div>
                         )}
 
-                        <Tabs defaultValue="login" className="w-full" onValueChange={setActiveTab}>
-                            <TabsList className="grid w-full grid-cols-2">
-                                <TabsTrigger value="login">Login</TabsTrigger>
-                                <TabsTrigger value="register">Register</TabsTrigger>
+                        <Tabs defaultValue="login" className="w-full rounded-md" onValueChange={setActiveTab}>
+                            <TabsList className="grid w-full grid-cols-2 rounded-md">
+                                <TabsTrigger value="login" className="rounded-md">Login</TabsTrigger>
+                                <TabsTrigger value="register" className="rounded-md">Register</TabsTrigger>
                             </TabsList>
 
-                            <TabsContent value="login">
-                                <form onSubmit={handleLogin} className="space-y-4 mt-4">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="login-email">Email</Label>
+                            <TabsContent value="login" className="rounded-md">
+                                <form onSubmit={handleLogin} className="space-y-4 mt-4 rounded-md">
+                                    <div className="space-y-2 rounded-md">
+                                        <Label htmlFor="login-email" className="rounded-md">Email</Label>
                                         <Input
                                             id="login-email"
                                             type="email"
@@ -133,12 +133,13 @@ export default function LoginPage() {
                                             onChange={(e) => setLoginEmail(e.target.value)}
                                             required
                                             autoComplete="email"
+                                            className="rounded-md"
                                         />
                                     </div>
-                                    <div className="space-y-2">
-                                        <div className="flex items-center justify-between">
-                                            <Label htmlFor="login-password">Password</Label>
-                                            <Link href="/forgot-password" className="text-sm text-green-600 hover:underline">
+                                    <div className="space-y-2 rounded-md">
+                                        <div className="flex items-center justify-between rounded-md">
+                                            <Label htmlFor="login-password" className="rounded-md">Password</Label>
+                                            <Link href="/forgot-password" className="text-sm text-green-600 hover:underline rounded-md">
                                                 Forgot password?
                                             </Link>
                                         </div>
@@ -150,11 +151,12 @@ export default function LoginPage() {
                                             onChange={(e) => setLoginPassword(e.target.value)}
                                             required
                                             autoComplete="current-password"
+                                            className="rounded-md"
                                         />
                                     </div>
                                     <Button
                                         type="submit"
-                                        className="w-full bg-green-600 hover:bg-green-700"
+                                        className="w-full bg-green-600 hover:bg-green-700 rounded-md"
                                         disabled={isLoading}
                                     >
                                         {isLoading ? "Logging in..." : "Login"}
@@ -162,11 +164,11 @@ export default function LoginPage() {
                                 </form>
                             </TabsContent>
 
-                            <TabsContent value="register">
-                                <form onSubmit={handleRegister} className="space-y-4 mt-4">
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div className="space-y-2">
-                                            <Label htmlFor="first-name">First Name</Label>
+                            <TabsContent value="register" className="rounded-md">
+                                <form onSubmit={handleRegister} className="space-y-4 mt-4 rounded-md">
+                                    <div className="grid grid-cols-2 gap-4 rounded-md">
+                                        <div className="space-y-2 rounded-md">
+                                            <Label htmlFor="first-name" className="rounded-md">First Name</Label>
                                             <Input
                                                 id="first-name"
                                                 placeholder="First Name"
@@ -174,10 +176,11 @@ export default function LoginPage() {
                                                 onChange={(e) => setFirstName(e.target.value)}
                                                 required
                                                 autoComplete="given-name"
+                                                className="rounded-md"
                                             />
                                         </div>
-                                        <div className="space-y-2">
-                                            <Label htmlFor="last-name">Last Name</Label>
+                                        <div className="space-y-2 rounded-md">
+                                            <Label htmlFor="last-name" className="rounded-md">Last Name</Label>
                                             <Input
                                                 id="last-name"
                                                 placeholder="Last Name"
@@ -185,12 +188,13 @@ export default function LoginPage() {
                                                 onChange={(e) => setLastName(e.target.value)}
                                                 required
                                                 autoComplete="family-name"
+                                                className="rounded-md"
                                             />
                                         </div>
                                     </div>
 
-                                    <div className="space-y-2">
-                                        <Label htmlFor="email">Email</Label>
+                                    <div className="space-y-2 rounded-md">
+                                        <Label htmlFor="email" className="rounded-md">Email</Label>
                                         <Input
                                             id="email"
                                             type="email"
@@ -199,11 +203,12 @@ export default function LoginPage() {
                                             onChange={(e) => setEmail(e.target.value)}
                                             required
                                             autoComplete="email"
+                                            className="rounded-md"
                                         />
                                     </div>
 
-                                    <div className="space-y-2">
-                                        <Label htmlFor="reg-password">Password</Label>
+                                    <div className="space-y-2 rounded-md">
+                                        <Label htmlFor="reg-password" className="rounded-md">Password</Label>
                                         <Input
                                             id="reg-password"
                                             type="password"
@@ -212,11 +217,12 @@ export default function LoginPage() {
                                             onChange={(e) => setPassword(e.target.value)}
                                             required
                                             autoComplete="new-password"
+                                            className="rounded-md"
                                         />
                                     </div>
 
-                                    <div className="space-y-2">
-                                        <Label htmlFor="confirm-password">Confirm Password</Label>
+                                    <div className="space-y-2 rounded-md">
+                                        <Label htmlFor="confirm-password" className="rounded-md">Confirm Password</Label>
                                         <Input
                                             id="confirm-password"
                                             type="password"
@@ -225,12 +231,13 @@ export default function LoginPage() {
                                             onChange={(e) => setConfirmPassword(e.target.value)}
                                             required
                                             autoComplete="new-password"
+                                            className="rounded-md"
                                         />
                                     </div>
 
                                     <Button
                                         type="submit"
-                                        className="w-full bg-green-600 hover:bg-green-700"
+                                        className="w-full bg-green-600 hover:bg-green-700 rounded-md"
                                         disabled={isLoading}
                                     >
                                         {isLoading ? "Creating Account..." : "Register"}

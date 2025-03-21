@@ -13,7 +13,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col bg-background">
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative w-full bg-gradient-to-r from-green-50 to-green-100 py-12 md:py-24">
+        <section className="relative w-full bg-gradient-to-r from-green-50 to-green-100 py-10 md:py-24">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
               <div className="flex flex-col justify-center space-y-4">
@@ -40,7 +40,7 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last">
+              <div className="mx-auto aspect-video rounded-xl object-cover object-center sm:w-full lg:order-last">
                 <Card className="border-0 shadow-lg">
                   <CardContent className="p-6">
                     <Tabs defaultValue="search" className="w-full">

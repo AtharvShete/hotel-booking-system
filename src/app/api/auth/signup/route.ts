@@ -3,7 +3,6 @@ import { db } from "@/server/db";
 import { hash } from "bcryptjs";
 import * as z from "zod";
 
-
 export const signUpSchema = z
   .object({
     firstName: z.string().min(1, { message: "First name is required" }),
@@ -61,7 +60,7 @@ export async function POST(request: NextRequest) {
         password: hashedPassword,
         firstName,
         lastName,
-        role: "USER", 
+        role: "USER",
       },
     });
 
@@ -76,13 +75,18 @@ export async function POST(request: NextRequest) {
   } catch (error: any) {
     console.error("Signup error:", error);
 
+    let errorMessage = "An error occurred during signup";
+    if (error.code === "P1001") {
+      errorMessage =
+        "Can't reach database server. Please ensure your database server is running.";
+    } else if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
     return NextResponse.json(
       {
         success: false,
-        message:
-          error instanceof Error
-            ? error.message
-            : "An error occurred during signup",
+        message: errorMessage,
         data: {},
       },
       { status: 500 },
