@@ -8,13 +8,17 @@ datasource db {
 }
 
 model User {
-  id        String  @id @default(uuid())
-  email     String  @unique
+  id        String    @id @default(uuid())
+  email     String    @unique
   password  String
   firstName String
   lastName  String
-  role      roles  @default(USER)
+  role      Role      @default(USER)
   tokens    Token[]
+  bookings  Booking[]
+  reviews   Review[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Token {
@@ -27,7 +31,7 @@ model Token {
 }
 
 model Booking {
-  id         String   @id @default(uuid())
+  id         String        @id @default(uuid())
   firstName  String
   lastName   String
   email      String
@@ -36,30 +40,74 @@ model Booking {
   checkIn    DateTime
   checkOut   DateTime
   userId     String
+  user       User          @relation(fields: [userId], references: [id])
   totalCost  Float
-  hotel      Hotel   @relation(fields: [hotelId], references: [id])
   hotelId    String
+  hotel      Hotel         @relation(fields: [hotelId], references: [id])
+  roomId     String
+  room       Room          @relation(fields: [roomId], references: [id])
+  createdAt  DateTime      @default(now())
+  status     BookingStatus @default(CONFIRMED)
 }
 
 model Hotel {
-  id           String    @id @default(uuid())
-  userId       String
-  name         String
-  city         String
-  country      String
-  description  String
-  type         String
-  adultCount   Int
-  childCount   Int
-  facilities   String[]
+  id            String    @id @default(uuid())
+  userId        String
+  name          String
+  city          String
+  country       String
+  description   String
+  type          String
+  adultCount    Int
+  childCount    Int
+  facilities    String[]
   pricePerNight Float
-  starRating   Int      @default(1)
-  imageUrls    String[]
-  lastUpdated  DateTime
-  bookings     Booking[]
+  starRating    Int       @default(1)
+  imageUrls     String[]
+  lastUpdated   DateTime
+  bookings      Booking[]
+  rooms         Room[]
+  reviews       Review[]
+  featured      Boolean   @default(false)
+  location      String?
 }
 
-enum roles{
+model Room {
+  id            String    @id @default(uuid())
+  name          String
+  description   String
+  pricePerNight Float
+  hotelId       String
+  hotel         Hotel     @relation(fields: [hotelId], references: [id])
+  bookings      Booking[]
+  imageUrls     String[]
+  capacity      Int
+  type          String
+  available     Boolean   @default(true)
+  features      String[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  rating    Float
+  comment   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  hotelId   String
+  hotel     Hotel    @relation(fields: [hotelId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+enum Role {
   USER
   ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
 }
