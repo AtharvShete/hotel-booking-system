@@ -13,7 +13,7 @@ model User {
   password  String
   firstName String
   lastName  String
-  role      String  @default("user")
+  role      roles  @default(USER)
   tokens    Token[]
 }
 
@@ -57,4 +57,9 @@ model Hotel {
   imageUrls    String[]
   lastUpdated  DateTime
   bookings     Booking[]
+}
+
+enum roles{
+  USER
+  ADMIN
 }
